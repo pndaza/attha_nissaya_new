@@ -1,0 +1,63 @@
+name: attha_nissaya
+description: A new Flutter project - Atthakatha Translation
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  freezed_annotation: ^0.14.1
+  flutter_riverpod: ^0.14.0+1
+  pdf_render: ^1.0.9
+  vs_scrollbar: ^0.2.0
+  shared_preferences: ^2.0.5
+  enum_to_string: ^2.0.1
+  grouped_list: ^4.0.0
+  scrollable_positioned_list: 0.2.0-nullsafety.0
+  sqflite: ^2.0.0+3
+  path_provider:
+  path: 
+  logger:
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^4.1.0
+  freezed: ^0.14.1+2
+  build_runner:
+  flutter_launcher_icons: ^0.9.0
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/attha_icon.png"
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/database/attha_nsy.db
+    - assets/books/cover/
+    - assets/books/pdf/
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
