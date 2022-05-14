@@ -7,7 +7,7 @@ class PdfController {
   PageController? _pageController;
 
   void attachController(PageController pageController) {
-    this._pageController = pageController;
+    _pageController = pageController;
   }
 
   void gotoPage(int pageNumber) {

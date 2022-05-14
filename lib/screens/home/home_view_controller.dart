@@ -1,9 +1,11 @@
+import 'package:attha_nissaya/screens/info/info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:attha_nissaya/models/book.dart';
-import 'package:attha_nissaya/repositories/book_repo.dart';
-import 'package:attha_nissaya/repositories/database.dart';
-import 'package:attha_nissaya/screens/page_list/page_choice.dart';
+
+import '../../models/book.dart';
+import '../../repositories/book_repo.dart';
+import '../../repositories/database.dart';
+import '../page_number_list/page_choice.dart';
 
 final paliBookRepoProvider =
     Provider((_) => DatabaseBookRepository(DatabaseHelper(), BookDao()));
@@ -17,10 +19,15 @@ final paliBooksProvider = FutureProvider<List<Book>>((ref) async {
 final homeViewController = Provider((_) => HomeViewController());
 
 class HomeViewController {
-  void openPageChoice(BuildContext context, Book book) {
+  void onBookItemClicked(BuildContext context, Book book) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (_) => PageChoice(
               book: book,
             )));
+  }
+
+  void onInfoClicked(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const InfoPage()));
   }
 }

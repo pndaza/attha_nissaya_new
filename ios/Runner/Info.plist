@@ -28,10 +28,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>mm.pndaza.tikanissaya</string>
+			<string>mm.pndaza.atthanissaya</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tikanissaya</string>
+				<string>atthanissaya</string>
 			</array>
 		</dict>
 		<dict/>

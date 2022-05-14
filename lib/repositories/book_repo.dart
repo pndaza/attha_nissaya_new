@@ -1,5 +1,6 @@
-import 'package:attha_nissaya/models/book.dart';
-import 'package:attha_nissaya/repositories/database.dart';
+
+import '../models/book.dart';
+import 'database.dart';
 
 abstract class BookRepository {
   Future<List<Book>> fetchBooks();
@@ -22,7 +23,6 @@ class DatabaseBookRepository extends BookRepository {
       bookDao.columnLastPage,
       bookDao.columnCount
     ]);
-
     return bookDao.fromList(results);
   }
 }

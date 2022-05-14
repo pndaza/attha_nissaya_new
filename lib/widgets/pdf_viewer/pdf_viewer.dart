@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'pdf_controller.dart';
 import 'package:pdf_render/pdf_render.dart';
 import 'package:pdf_render/pdf_render_widgets.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 
+import 'pdf_controller.dart';
 import 'pdf_info.dart';
 
 typedef OnPageChanged = void Function(int);
@@ -43,12 +43,10 @@ class _MyPdfViewerState extends State<MyPdfViewer> {
           future: pdfInfo,
           builder: (BuildContext context, AsyncSnapshot<PdfInfo> snapshot) {
             if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
-            if (snapshot.hasError) {
-              return Center(
-                child: Text('Something worng'),
-              );
+            else if (snapshot.hasError) {
+              return const Center(child: Text('Something worng'));
             }
             final pdfInfo = snapshot.data!;
             double viewportFraction = findViewportFraction(
@@ -78,7 +76,7 @@ class _MyPdfViewerState extends State<MyPdfViewer> {
     int initialPage,
   ) {
     return VsScrollbar(
-      style: VsScrollbarStyle(thickness: 24, color: Colors.blueGrey),
+      style: const VsScrollbarStyle(thickness: 24, color: Colors.blueGrey),
       controller: _scrollController,
       child: InteractiveViewer(
         child: PageView.builder(
@@ -94,7 +92,7 @@ class _MyPdfViewerState extends State<MyPdfViewer> {
               return Container(
                 alignment: Alignment.center,
                 // margin: EdgeInsets.all(4),
-                padding: EdgeInsets.all(1),
+                padding: const EdgeInsets.all(1),
                 color: Colors.grey[300],
                 child: PdfPageView(
                     pdfDocument: pdfInfo.document, pageNumber: index + 1),
