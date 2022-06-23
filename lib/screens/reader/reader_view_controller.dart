@@ -1,3 +1,4 @@
+import 'package:attha_nissaya/packages/pdf_render/assets_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../client/shared_pref_client.dart';
@@ -10,6 +11,11 @@ final appBarHeight = StateProvider<double>((ref) {
 
 final scrollDirectionProvider = StateProvider<Axis>((_) {
   return SharedPreferenceClient.scrollDirection;
+});
+
+final pdfColorModeProvider = StateProvider<ColorMode>((_) {
+  int colorIndex = SharedPreferenceClient.pdfThemeModeIndex;
+  return ColorMode.values[colorIndex];
 });
 
 final readerViewController =
@@ -32,6 +38,19 @@ class ReaderViewController {
 
   void _saveScrollDirection(Axis value) {
     SharedPreferenceClient.scrollDirection = value;
+  }
+
+  void changePdfColorMode(ColorMode colorMode) {
+    _updatePdfColorModeState(colorMode);
+    _savePdfColorMode(colorMode);
+  }
+
+  void _updatePdfColorModeState(ColorMode colorMode) {
+    ref.read(pdfColorModeProvider.notifier).state = colorMode;
+  }
+
+  void _savePdfColorMode(ColorMode colorMode) {
+    SharedPreferenceClient.pdfThemeModeIndex = colorMode.index;
   }
 
   void toggleFullScreenMode() {

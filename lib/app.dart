@@ -1,20 +1,26 @@
+import 'package:attha_nissaya/screens/home/home_view_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'deep_link_handler.dart';
 import 'deep_link_view.dart';
 import 'screens/home/home_page.dart'; 
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final _deepLinkBloc = DeepLinkHandler();
+
+    final themeMode = ref.watch(themeProvider);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Atthakatha Nissaya',
       theme: ThemeData(primarySwatch: Colors.pink),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeMode,
       home: StreamBuilder<String>(
           stream: _deepLinkBloc.state,
           builder: (context, snapshot) {

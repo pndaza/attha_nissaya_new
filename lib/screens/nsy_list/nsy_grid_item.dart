@@ -13,7 +13,6 @@ class NsyGirdItem extends StatelessWidget {
       onTap: onClicked,
       child: Card(
         margin: const EdgeInsets.all(4),
-        color: Colors.grey[50],
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../widgets/pdf_viewer/pdf_controller.dart';
-import '../../widgets/pdf_viewer/pdf_viewer.dart';
+import '../../packages/pdf_render/assets_pdf_viewer.dart';
 import 'reader_appbar.dart';
 import 'reader_view_controller.dart';
 
@@ -30,10 +29,12 @@ class BookReader extends ConsumerWidget {
         child: Consumer(
           builder: (context, watch, child) {
             final _scrollDirection = ref.watch(scrollDirectionProvider);
-            return MyPdfViewer(
+            final _colorMode = ref.watch(pdfColorModeProvider);
+            return AssetPdfViewer(
               assetPath: 'assets/books/pdf/$id.pdf',
               scrollDirection: _scrollDirection,
               pdfController: pdfController,
+              colorMode: _colorMode,
             );
           },
         ),

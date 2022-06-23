@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../packages/pdf_render/pdf_page_view.dart';
 import 'reader_view_controller.dart';
 
 class ReaderAppBar extends ConsumerWidget implements PreferredSizeWidget {
@@ -13,6 +14,7 @@ class ReaderAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollDirection = ref.watch(scrollDirectionProvider);
+    final pdfColorMode = ref.watch(pdfColorModeProvider);
     final isFullScreenMode = ref.watch(fullScreenStateProvider);
 
     if (isFullScreenMode) {
@@ -34,7 +36,31 @@ class ReaderAppBar extends ConsumerWidget implements PreferredSizeWidget {
               ref
                   .read(readerViewController)
                   .toggleScrollDirection(scrollDirection);
-            })
+            }),
+        PopupMenuButton<ColorMode>(
+          icon: const Icon(Icons.palette_outlined),
+          initialValue: pdfColorMode,
+          itemBuilder: (_) => const [
+            PopupMenuItem(
+              value: ColorMode.day,
+              child: Text('အဖြူ'),
+            ),
+            PopupMenuItem(
+              value: ColorMode.night,
+              child: Text('အမဲ'),
+            ),
+            PopupMenuItem(
+              padding: EdgeInsets.only(left: 16),
+              value: ColorMode.speia,
+              child: Text('ဝါကျင့်ကျင့်'),
+            ),
+          ],
+          onSelected: (colorMode) {
+            ref.read(readerViewController).changePdfColorMode(colorMode);
+          },
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        ),
       ],
     );
   }

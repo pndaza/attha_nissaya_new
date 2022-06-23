@@ -12,11 +12,37 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(paliBooksProvider);
+    final themeMode = ref.watch(themeProvider);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('အဋ္ဌကထာနိဿယ'),
           centerTitle: true,
           actions: [
+            PopupMenuButton<ThemeMode>(
+              icon: const Icon(Icons.palette_outlined),
+              initialValue: themeMode,
+              itemBuilder: (_) => const [
+                PopupMenuItem(
+                  value: ThemeMode.light,
+                  child: Text('နေ့'),
+                ),
+                PopupMenuItem(
+                  value: ThemeMode.dark,
+                  child: Text('ည'),
+                ),
+                PopupMenuItem(
+                  padding: EdgeInsets.only(left: 16),
+                  value: ThemeMode.system,
+                  child: Text('စက်'),
+                ),
+              ],
+              onSelected: (themeMode) {
+                ref.read(homeViewController).changeThemeMode(themeMode);
+              },
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+            ),
             IconButton(
                 onPressed: () =>
                     ref.read(homeViewController).onInfoClicked(context),
