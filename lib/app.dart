@@ -14,7 +14,6 @@ class MyApp extends ConsumerWidget {
     final _deepLinkBloc = DeepLinkHandler();
 
     final themeMode = ref.watch(themeProvider);
-    print(themeMode);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
