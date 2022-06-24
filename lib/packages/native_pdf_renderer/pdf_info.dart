@@ -1,4 +1,5 @@
-import 'package:pdf_render/pdf_render.dart';
+
+import 'package:native_pdf_renderer/native_pdf_renderer.dart';
 
 class PdfInfo {
   PdfDocument document;

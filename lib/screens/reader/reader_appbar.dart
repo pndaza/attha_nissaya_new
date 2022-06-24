@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../packages/pdf_render/pdf_page_view.dart';
+import '../../packages/native_pdf_renderer/pdf_page_view.dart';
 import 'reader_view_controller.dart';
 
 class ReaderAppBar extends ConsumerWidget implements PreferredSizeWidget {

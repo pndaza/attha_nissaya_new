@@ -1,4 +1,4 @@
-import 'package:attha_nissaya/packages/pdf_render/assets_pdf_viewer.dart';
+import 'package:attha_nissaya/packages/native_pdf_renderer/assets_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../client/shared_pref_client.dart';

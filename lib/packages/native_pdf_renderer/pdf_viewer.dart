@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pdf_render/pdf_render_widgets.dart';
+import 'package:native_pdf_renderer/native_pdf_renderer.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
-import 'pdf_controller.dart';
-import 'package:pdf_render/pdf_render.dart';
-import 'pdf_page_view.dart';
+import 'dart:io';
 
+import 'pdf_controller.dart';
 import 'pdf_info.dart';
+import 'pdf_page_view.dart';
 
 typedef OnPageChanged = void Function(int);
 
@@ -16,20 +16,20 @@ class AssetPdfViewer extends StatefulWidget {
   final OnPageChanged? onPageChanged;
   final ColorMode colorMode;
 
-  const AssetPdfViewer(
-      {Key? key,
-      required this.assetPath,
-      this.scrollDirection = Axis.vertical,
-      this.pdfController,
-      this.onPageChanged,
-      this.colorMode = ColorMode.day,})
-      : super(key: key);
+  const AssetPdfViewer({
+    Key? key,
+    required this.assetPath,
+    this.scrollDirection = Axis.vertical,
+    this.pdfController,
+    this.onPageChanged,
+    this.colorMode = ColorMode.day,
+  }) : super(key: key);
 
   @override
-  _AssetPdfViewer createState() => _AssetPdfViewer();
+  _AssetPdfViewerState createState() => _AssetPdfViewerState();
 }
 
-class _AssetPdfViewer extends State<AssetPdfViewer> {
+class _AssetPdfViewerState extends State<AssetPdfViewer> {
   ScrollController? _scrollController;
 
   @override
@@ -47,8 +47,7 @@ class _AssetPdfViewer extends State<AssetPdfViewer> {
           builder: (BuildContext context, AsyncSnapshot<PdfInfo> snapshot) {
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasError) {
+            } else if (snapshot.hasError) {
               return const Center(child: Text('Something worng'));
             }
             final pdfInfo = snapshot.data!;
@@ -78,29 +77,32 @@ class _AssetPdfViewer extends State<AssetPdfViewer> {
     PdfInfo pdfInfo,
     int initialPage,
   ) {
+    final scaleEnabled = (Platform.isAndroid || Platform.isIOS) ? true : false;
     return VsScrollbar(
-      style: const VsScrollbarStyle(thickness: 24, color: Colors.blueGrey),
+      style: const VsScrollbarStyle(
+        thickness: 24,
+        color: Color.fromARGB(255, 0, 69, 104),
+      ),
       controller: _scrollController,
       child: InteractiveViewer(
+        scaleEnabled: scaleEnabled,
         child: PageView.builder(
             controller: _scrollController as PageController,
             scrollDirection: widget.scrollDirection,
             pageSnapping:
                 widget.scrollDirection == Axis.horizontal ? true : false,
-            onPageChanged: widget.onPageChanged == null
-                ? null
-                : (index) => widget.onPageChanged?.call(index + 1),
+            onPageChanged: (index) => widget.onPageChanged?.call(index + 1),
             itemCount: pdfInfo.pageCount,
             itemBuilder: (context, index) {
               return Container(
                 alignment: Alignment.center,
                 // margin: EdgeInsets.all(4),
-                padding: const EdgeInsets.all(2),
+                padding: const EdgeInsets.all(1),
                 color: _getBackGroundColor(widget.colorMode),
-                child: MyPdfPageView(
-                  pdfPageView: PdfPageView(
-                      pdfDocument: pdfInfo.document, pageNumber: index + 1),
-                      colorMode: widget.colorMode,
+                child: PdfPageView(
+                  pdfDocument: pdfInfo.document,
+                  pageNumber: index + 1,
+                  colorMode: widget.colorMode,
                 ),
               );
             }),
@@ -110,11 +112,11 @@ class _AssetPdfViewer extends State<AssetPdfViewer> {
 
   Future<PdfInfo> _loadPdf(String assetPath) async {
     final doc = await PdfDocument.openAsset(assetPath);
-    final pageCount = doc.pageCount;
-    final page = pageCount > 10 ? await doc.getPage(55) : await doc.getPage(1);
-    final pageImage = await page.render();
-    final width = pageImage.width;
-    final height = pageImage.height;
+    final pageCount = doc.pagesCount;
+    final page = pageCount > 55 ? await doc.getPage(55) : await doc.getPage(2);
+    final width = page.width;
+    final height = page.height;
+    page.close();
 
     return PdfInfo(doc, pageCount, width, height);
   }

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../packages/pdf_render/pdf_info.dart';
+import '../../packages/native_pdf_renderer/pdf_info.dart';
 
 part 'reader_state.freezed.dart';
 
