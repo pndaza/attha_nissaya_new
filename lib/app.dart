@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'deep_link_handler.dart';
 import 'deep_link_view.dart';
-import 'screens/home/home_page.dart'; 
+import 'screens/home/home_page.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -14,6 +14,7 @@ class MyApp extends ConsumerWidget {
     final _deepLinkBloc = DeepLinkHandler();
 
     final themeMode = ref.watch(themeProvider);
+    print(themeMode);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -27,7 +28,8 @@ class MyApp extends ConsumerWidget {
             if (snapshot.hasData) {
               debugPrint(snapshot.data);
               debugPrint('opening from deep link');
-              return DeepLinkView(key: Key(snapshot.data!), url: snapshot.data!);
+              return DeepLinkView(
+                  key: Key(snapshot.data!), url: snapshot.data!);
             } else {
               return const Home();
             }

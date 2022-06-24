@@ -52,6 +52,6 @@ class HomeViewController {
   }
 
   void _saveThemeMode(ThemeMode themeMode) {
-    SharedPreferenceClient.pdfThemeModeIndex = themeMode.index;
+    SharedPreferenceClient.themeModeIndex = themeMode.index;
   }
 }
