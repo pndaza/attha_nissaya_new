@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 
 import 'package:flutter/services.dart';
 
@@ -40,6 +41,8 @@ class DeepLinkHandler {
   }
 
   Future<String> startUri() async {
+    if (Platform.isWindows) return 'not support now';
+
     try {
       final initialLink = await platform.invokeMethod('initialLink') as String;
       // print('initialLink: $initialLink');
