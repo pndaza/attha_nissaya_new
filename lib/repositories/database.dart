@@ -74,7 +74,8 @@ class DatabaseHelper {
 
   Future<void> _saveDatabaseFromAssets({required String dbFilePath}) async {
     // Copy from asset
-    final dbFileAssetsPath = join(DatabaseInfo.assetsPath, DatabaseInfo.dbName);
+    const dbFileAssetsPath =
+        "${DatabaseInfo.assetsPath}/${DatabaseInfo.dbName}";
     await _copyDatabase(assetsPath: dbFileAssetsPath, destination: dbFilePath);
 
     // save to pref
