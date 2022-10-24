@@ -15,23 +15,28 @@ dependencies:
     sdk: flutter
   freezed_annotation: ^1.1.0
   flutter_riverpod: ^1.0.3
-  # pdf_render: ^1.0.9
-  native_pdf_renderer: 4.0.1
   vs_scrollbar: ^0.2.0
   shared_preferences: ^2.0.5
   enum_to_string: ^2.0.1
   flutter_markdown: ^0.6.1
   grouped_list: ^4.1.0
   scrollable_positioned_list: ^0.2.3
-  sqflite: ^2.0.2
   path_provider: ^2.0.8
   path: ^1.8.0
   logger: ^1.1.0
   cupertino_icons: ^1.0.2
   go_router: ^3.0.1
-  flutter_widget_from_html_core: ^0.8.4
+  flutter_widget_from_html_core: ^0.8.5+3
+  sqflite: ^2.1.0
   sqflite_common_ffi: ^2.1.1+1
-  sqlite3_flutter_libs:
+  # sqlite3_flutter_libs:
+  asset_pdf_viewer:
+    # path: packages/asset_pdf_viewer_mobile
+    path: packages/asset_pdf_viewer_desktop
+  # app_links: ^3.2.0
+  # url_protocol: ^1.0.0
+  uni_links_desktop: ^0.1.3
+  uni_links: ^0.5.1
 
 dev_dependencies:
   flutter_test:

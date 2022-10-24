@@ -57,7 +57,7 @@ class PdfPageView extends StatelessWidget {
             }
             final PdfPage pdfPage = snapShot.data!;
             final scaleFactor =
-                _getScaleFactor(width: pdfPage.width, widthToRender: 1600);
+                _getScaleFactor(width: pdfPage.width, widthToRender: 2100);
 
             return FutureBuilder<PdfPageImage?>(
                 future: pdfPage.render(

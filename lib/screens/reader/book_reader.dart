@@ -1,7 +1,7 @@
+import 'package:asset_pdf_viewer/asset_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../packages/native_pdf_renderer/assets_pdf_viewer.dart';
 import 'reader_appbar.dart';
 import 'reader_view_controller.dart';
 

@@ -21,7 +21,7 @@ class _DeepLinkViewState extends State<DeepLinkView> {
     bookId = parseBookId(widget.url);
     pageNumber = parsePageNumber(widget.url);
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       debugPrint(bookId);
       debugPrint(pageNumber);
       if (bookId != null && pageNumber != null) {
