@@ -58,9 +58,9 @@ flutter_icons:
   image_path: "assets/icon/attha_icon.png"
 
 msix_config:
-  display_name: Pali Nissaya
+  display_name: Atthakatha Nissaya
   publisher_display_name: PnDaza
-  identity_name: mm.pndaza.palinissaya
+  identity_name: mm.pndaza.atthanissaya
   msix_version: 1.0.0.0
   logo_path: .\assets\icon\attha_icon.png
 
