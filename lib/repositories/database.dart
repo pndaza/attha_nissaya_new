@@ -32,7 +32,7 @@ class DatabaseHelper {
       databasesDirPath = await getDatabasesPath();
     }
     if (Platform.isLinux || Platform.isWindows) {
-      final docDirPath = await getApplicationDocumentsDirectory();
+      final docDirPath = await getApplicationSupportDirectory();
       databasesDirPath = docDirPath.path;
     }
     var dbFilePath = join(databasesDirPath, DatabaseInfo.dbName);

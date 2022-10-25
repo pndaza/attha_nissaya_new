@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:attha_nissaya/screens/home/home_view_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uni_links/uni_links.dart';
 
 import 'deep_link_handler.dart';
-import 'deep_link_view.dart';
 import 'screens/home/home_page.dart';
 import 'screens/home/home_view_controller.dart';
 import 'screens/nsy_list/nsy_choice.dart';
