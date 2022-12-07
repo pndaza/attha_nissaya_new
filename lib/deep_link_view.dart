@@ -45,15 +45,22 @@ class _DeepLinkViewState extends State<DeepLinkView> {
   }
 
   String? parseBookId(String url) {
-    
+    final uri = Uri.parse(url);
+    return uri.queryParameters['id'];
+    /*
     RegExp regexId = RegExp(r'\w+_\w+_\d+(_\d+)?');
     final matchId = regexId.firstMatch(url);
     return matchId?.group(0);
+    */
   }
 
   String? parsePageNumber(String url) {
+    final uri = Uri.parse(url);
+    return uri.queryParameters['page'];
+    /*
     RegExp regexPage = RegExp(r'\d+$');
     final matchPage = regexPage.firstMatch(url);
     return matchPage?.group(0);
+    */
   }
 }
