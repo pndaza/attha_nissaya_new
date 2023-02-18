@@ -16,14 +16,14 @@ class AssetPdfViewer extends StatefulWidget {
   final OnPageChanged? onPageChanged;
   final ColorMode colorMode;
 
-  const AssetPdfViewer(
-      {Key? key,
-      required this.assetPath,
-      this.scrollDirection = Axis.vertical,
-      this.pdfController,
-      this.onPageChanged,
-      this.colorMode = ColorMode.day,})
-      : super(key: key);
+  const AssetPdfViewer({
+    Key? key,
+    required this.assetPath,
+    this.scrollDirection = Axis.vertical,
+    this.pdfController,
+    this.onPageChanged,
+    this.colorMode = ColorMode.day,
+  }) : super(key: key);
 
   @override
   _AssetPdfViewer createState() => _AssetPdfViewer();
@@ -31,17 +31,30 @@ class AssetPdfViewer extends StatefulWidget {
 
 class _AssetPdfViewer extends State<AssetPdfViewer> {
   ScrollController? _scrollController;
+  late final Future<PdfInfo> pdfInfo;
+  late final int initialPage;
+  late double viewportRatio;
+  late int currentPageIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    pdfInfo = _loadPdf(widget.assetPath);
+    initialPage = widget.pdfController?.intialPage ?? 1;
+    currentPageIndex = initialPage - 1;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final pdfInfo = _loadPdf(widget.assetPath);
-    final initialPage = widget.pdfController?.intialPage ?? 1;
+        WidgetsBinding.instance.addPostFrameCallback((_) => _gotoTopOfpage());
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final parentWidth = constraints.maxWidth;
         final parentHeight = constraints.maxHeight;
 
+        viewportRatio = parentHeight / parentWidth;
+        
         return FutureBuilder(
           future: pdfInfo,
           builder: (BuildContext context, AsyncSnapshot<PdfInfo> snapshot) {
@@ -100,7 +113,7 @@ class _AssetPdfViewer extends State<AssetPdfViewer> {
                 child: MyPdfPageView(
                   pdfPageView: PdfPageView(
                       pdfDocument: pdfInfo.document, pageNumber: index + 1),
-                      colorMode: widget.colorMode,
+                  colorMode: widget.colorMode,
                 ),
               );
             }),
@@ -144,6 +157,47 @@ class _AssetPdfViewer extends State<AssetPdfViewer> {
         return const Color.fromARGB(255, 255, 255, 213);
       case ColorMode.grayscale:
         return Colors.grey;
+    }
+  }
+  void _gotoTopOfpage() async {
+    // debugPrint('need scroll: $isNeedScrollToTop');
+    if (viewportRatio > 1.55) return;
+    // _scroll controller is still not initialized
+    // need to wait
+    await Future.delayed(const Duration(milliseconds: 150));
+
+    double? offset = _scrollController?.offset;
+    if (offset == null) return;
+
+    late double value;
+    if (viewportRatio > 1.4) {
+      value = 50;
+    } else if (viewportRatio > 1.3) {
+      value = 80;
+    } else if (viewportRatio > 1.2) {
+      value = 110;
+    } else if (viewportRatio > 1.1) {
+      value = 150;
+    } else if (viewportRatio > 1) {
+      value = 200;
+    } else if (viewportRatio > 0.9) {
+      value = 260;
+    } else if (viewportRatio > 0.8) {
+      value = 320;
+    } else if (viewportRatio > 0.7) {
+      value = 400;
+    } else if (viewportRatio > 0.6) {
+      value = 500;
+    } else {
+      value = 600;
+    }
+    // estimate
+    offset = offset - value;
+    if (offset < 0) {
+      // first page case
+      _scrollController?.jumpTo(0);
+    } else {
+      _scrollController?.jumpTo(offset);
     }
   }
 }
