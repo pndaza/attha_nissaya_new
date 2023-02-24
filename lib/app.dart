@@ -50,8 +50,8 @@ class MyAppState extends ConsumerState<MyApp> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tika Nissaya',
-      theme: ThemeData(primarySwatch: Colors.teal),
+      title: 'Attha Nissaya',
+      theme: ThemeData(primarySwatch: Colors.pink),
       darkTheme: ThemeData.dark(),
       themeMode: themeMode,
       navigatorKey: _navigatorKey,

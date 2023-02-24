@@ -29,7 +29,7 @@ dependencies:
   flutter_widget_from_html_core: ^0.8.5+3
   sqflite: ^2.1.0
   sqflite_common_ffi: ^2.1.1+1
-  # sqlite3_flutter_libs:
+  sqlite3_flutter_libs:
   asset_pdf_viewer:
     # path: packages/asset_pdf_viewer_mobile
     path: packages/asset_pdf_viewer_desktop
@@ -47,7 +47,7 @@ dev_dependencies:
   build_runner:
   # flutter_launcher_icons: ^0.9.0
   icons_launcher: ^1.1.8
-  msix: ^3.6.2
+  msix: ^3.7.0
 
 
 flutter_icons:
@@ -58,10 +58,13 @@ flutter_icons:
   image_path: "assets/icon/attha_icon.png"
 
 msix_config:
-  display_name: Atthakatha Nissaya
+  display_name: Attha Nissaya
+  identity_name: 38337PnDaza.AtthaNissaya
   publisher_display_name: PnDaza
-  identity_name: mm.pndaza.atthanissaya
-  msix_version: 1.0.0.0
+  publisher: CN=D6488D0D-2C1E-4BF6-9E71-85196599EEB3
+  msix_version: 1.1.0.0
+  protocol_activation: atthanissaya
+  store: true
   logo_path: .\assets\icon\attha_icon.png
 
 # The following section is specific to Flutter.
