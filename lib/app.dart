@@ -11,6 +11,7 @@ import 'screens/home/home_page.dart';
 import 'screens/home/home_view_controller.dart';
 import 'screens/nsy_list/nsy_choice.dart';
 import 'utils/platform_helper.dart';
+
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -130,18 +131,20 @@ class MyAppState extends ConsumerState<MyApp> {
     debugPrint(paliBookId);
     debugPrint(pageNumber);
     if (paliBookId != null && pageNumber != null) {
+      // Todo: extract book name from db
       final route = nsyChoiceRoute(
         paliBookId: paliBookId,
         pageNumber: int.parse(pageNumber),
       );
-      
+
       _navigatorKey.currentState
           ?.pushAndRemoveUntil(route, (Route<dynamic> route) => false);
-      }
+    }
   }
 
   MaterialPageRoute nsyChoiceRoute(
-      {required String paliBookId, required int pageNumber}) {
+      {required String paliBookId,
+      required int pageNumber}) {
     return MaterialPageRoute(
       builder: (_) => NsyChoice(
         paliBookID: paliBookId,

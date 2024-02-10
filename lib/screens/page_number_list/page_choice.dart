@@ -1,9 +1,10 @@
+import 'package:attha_nissaya/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../models/book.dart';
-import 'page_choice_providers.dart';
+import '../nsy_list/nsy_choice.dart';
 import 'page_number_listview.dart';
 import 'section_listview.dart';
 
@@ -28,9 +29,12 @@ class PageChoice extends ConsumerWidget {
             child: PageNumberListView(
               firstPage: book.firstPage,
               lastPage: book.lastPage,
-              onPageNumberClicked: (pageNumber) => ref
-                  .read(pageChoiceViewController)
-                  .onPageNumberClicked(context, book, pageNumber),
+              onPageNumberClicked: (pageNumber) {
+                context.goto(NsyChoice(
+                    paliBookID: book.id,
+                    paliBookName: book.name,
+                    paliBookPageNumber: pageNumber));
+              },
               itemScrollController: itemScrollController,
             ),
           ),

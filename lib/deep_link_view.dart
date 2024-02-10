@@ -8,7 +8,7 @@ class DeepLinkView extends StatefulWidget {
   final String url;
 
   @override
-  _DeepLinkViewState createState() => _DeepLinkViewState();
+  State<DeepLinkView> createState() => _DeepLinkViewState();
 }
 
 class _DeepLinkViewState extends State<DeepLinkView> {

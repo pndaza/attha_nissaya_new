@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,6 +11,7 @@ class PageChoiceViewController {
   void onPageNumberClicked(BuildContext context, Book book, int pageNumber) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (_) =>
-            NsyChoice(paliBookID: book.id, paliBookPageNumber: pageNumber)));
+            NsyChoice(paliBookID: book.id, paliBookName: ,paliBookPageNumber: pageNumber)));
   }
 }
+*/
