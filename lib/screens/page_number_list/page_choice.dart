@@ -10,9 +10,9 @@ import 'section_listview.dart';
 
 class PageChoice extends ConsumerWidget {
   PageChoice({
-    Key? key,
+    super.key,
     required this.book,
-  }) : super(key: key);
+  });
 
   final Book book;
   final ItemScrollController itemScrollController = ItemScrollController();

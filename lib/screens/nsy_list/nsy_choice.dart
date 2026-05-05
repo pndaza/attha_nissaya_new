@@ -11,12 +11,12 @@ import 'nsy_grid_view.dart';
 
 class NsyChoice extends ConsumerWidget {
   const NsyChoice({
-    Key? key,
+    super.key,
     required this.paliBookID,
     this.paliBookName,
     required this.paliBookPageNumber,
     this.isOpenFromDeepLink = false,
-  }) : super(key: key);
+  });
   final String paliBookID;
   final String? paliBookName;
   final int paliBookPageNumber;
@@ -60,7 +60,7 @@ class NsyChoice extends ConsumerWidget {
                     );
               }),
           loading: () => const LoadingView(),
-          error: (_, __) => const ErrorView()),
+          error: (_, _) => const ErrorView()),
     );
   }
 }

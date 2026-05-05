@@ -5,11 +5,11 @@ import 'recent_list_tile.dart';
 
 class RecentListView extends StatelessWidget {
   const RecentListView({
-    Key? key,
+    super.key,
     required this.recents,
     this.onItemClicked,
     this.onItemDeleted,
-  }) : super(key: key);
+  });
 
   final List<Recent> recents;
   final ValueChanged<Recent>? onItemClicked;
@@ -32,7 +32,7 @@ class RecentListView extends StatelessWidget {
 }
 
 class EmpytView extends StatelessWidget {
-  const EmpytView({Key? key}) : super(key: key);
+  const EmpytView({super.key});
 
   @override
   Widget build(BuildContext context) {

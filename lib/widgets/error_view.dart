@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ErrorView extends StatelessWidget {
-  const ErrorView({Key? key, this.object, this.stackTrace}) : super(key: key);
+  const ErrorView({super.key, this.object, this.stackTrace});
 
   final Object? object;
   final StackTrace? stackTrace;

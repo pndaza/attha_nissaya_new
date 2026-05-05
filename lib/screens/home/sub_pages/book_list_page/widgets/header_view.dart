@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HeaderView extends StatelessWidget {
-  const HeaderView({Key? key, required this.categoryName}) : super(key: key);
+  const HeaderView({super.key, required this.categoryName});
   final String categoryName;
 
   @override

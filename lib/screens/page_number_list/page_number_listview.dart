@@ -4,12 +4,11 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class PageNumberListView extends StatelessWidget {
   const PageNumberListView(
-      {Key? key,
+      {super.key,
       required this.firstPage,
       required this.lastPage,
       required this.onPageNumberClicked,
-      this.itemScrollController})
-      : super(key: key);
+      this.itemScrollController});
 
   final int firstPage;
   final int lastPage;
@@ -36,7 +35,7 @@ class PageNumberListView extends StatelessWidget {
         );
       },
       itemScrollController: itemScrollController,
-      separatorBuilder: (_, __) => const Divider(height: 1.0),
+      separatorBuilder: (_, _) => const Divider(height: 1.0),
     );
   }
 }

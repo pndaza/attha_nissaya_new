@@ -3,11 +3,13 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  native_pdf_renderer
   uni_links_desktop
+  url_launcher_windows
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  jni
+  pdfrx
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

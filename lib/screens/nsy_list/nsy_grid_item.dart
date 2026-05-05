@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/nsybook.dart';
 
 class NsyGirdItem extends StatelessWidget {
-  const NsyGirdItem({Key? key, required this.nsyBook, this.onClicked})
-      : super(key: key);
+  const NsyGirdItem({super.key, required this.nsyBook, this.onClicked});
   final NsyBook nsyBook;
   final VoidCallback? onClicked;
   @override

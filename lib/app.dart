@@ -13,7 +13,7 @@ import 'screens/nsy_list/nsy_choice.dart';
 import 'utils/platform_helper.dart';
 
 class MyApp extends ConsumerStatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   ConsumerState<MyApp> createState() => MyAppState();

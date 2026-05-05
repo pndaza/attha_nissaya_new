@@ -9,7 +9,7 @@ import 'book_list_tile.dart';
 import 'header_view.dart';
 
 class PaliBookList extends ConsumerWidget {
-  const PaliBookList({Key? key, required this.books}) : super(key: key);
+  const PaliBookList({super.key, required this.books});
   final List<Book> books;
 
   @override

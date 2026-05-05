@@ -11,7 +11,7 @@ import 'recent_page_controller.dart';
 import 'widgets/recent_list_view.dart';
 
 class RecentPage extends StatefulWidget {
-  const RecentPage({Key? key}) : super(key: key);
+  const RecentPage({super.key});
 
   @override
   State<RecentPage> createState() => _RecentPageState();
@@ -33,7 +33,7 @@ class _RecentPageState extends State<RecentPage> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
         valueListenable: viewController.state,
-        builder: (_, state, __) {
+        builder: (_, state, _) {
           if (state == RecentState.loading) {
             return const LoadingView();
           } else if (state == RecentState.error) {

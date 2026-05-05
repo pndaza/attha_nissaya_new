@@ -7,7 +7,7 @@ import 'book_list_page_controller.dart';
 import 'widgets/book_list.dart';
 
 class BookListPage extends ConsumerWidget {
-  const BookListPage({Key? key}) : super(key: key);
+  const BookListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

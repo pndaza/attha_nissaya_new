@@ -19,7 +19,7 @@ class NavDestination {
 }
 
 class Home extends ConsumerStatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   HomeState createState() => HomeState();
@@ -48,7 +48,7 @@ class HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
     final themeMode = ref.watch(themeProvider);
-    final textScaleFactor = MediaQuery.textScaleFactorOf(context);
+    final textScaler = MediaQuery.textScalerOf(context);
     final appBar = AppBar(
       title: const Text('အဋ္ဌကထာနိဿယ'),
       centerTitle: true,
@@ -101,9 +101,9 @@ class HomeState extends ConsumerState<Home> {
       bottomNavigationBar: isMobile
           ? NavigationBarTheme(
               data: Theme.of(context).navigationBarTheme.copyWith(
-                    labelTextStyle: MaterialStateProperty.resolveWith(
+                    labelTextStyle: WidgetStateProperty.resolveWith(
                       (states) => TextStyle(
-                          fontSize: (16 * textScaleFactor).clamp(16.0, 18.0)),
+                          fontSize: textScaler.clamp(minScaleFactor: 1.0, maxScaleFactor: 18.0 / 16.0).scale(16.0)),
                     ),
                   ),
               child: NavigationBar(

@@ -30,7 +30,7 @@ class DeepLinkHandler {
     stream.receiveBroadcastStream().listen((d) => _onRedirected(d));
   }
 
-  _onRedirected(String uri) {
+  void _onRedirected(String uri) {
     // Here can be any uri analysis, checking tokens etc, if it’s necessary
     // Throw deep link URI into the BloC's stream
     stateSink.add(uri);
