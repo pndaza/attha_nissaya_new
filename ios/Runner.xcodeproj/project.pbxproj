@@ -144,6 +144,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				56F36F1C6950C58EBE46344D /* [CP] Embed Pods Frameworks */,
+				A7D1B02E2C81E3C500C0DE01 /* Sign Native Asset Frameworks */,
 			);
 			buildRules = (
 			);
@@ -271,6 +272,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+		};
+		A7D1B02E2C81E3C500C0DE01 /* Sign Native Asset Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Sign Native Asset Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nif [ \"${CODE_SIGNING_ALLOWED:-}\" = \"NO\" ]; then\n  exit 0\nfi\n\nSIGN_IDENTITY=\"${EXPANDED_CODE_SIGN_IDENTITY:-}\"\nif [ -z \"$SIGN_IDENTITY\" ] || [ \"$SIGN_IDENTITY\" = \"-\" ]; then\n  SIGN_IDENTITY=\"${CODE_SIGN_IDENTITY:-}\"\nfi\nif [ -z \"$SIGN_IDENTITY\" ] || [ \"$SIGN_IDENTITY\" = \"-\" ]; then\n  exit 0\nfi\n\nFRAMEWORKS_DIR=\"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\nif [ ! -d \"$FRAMEWORKS_DIR\" ]; then\n  exit 0\nfi\n\nfor framework in \"$FRAMEWORKS_DIR\"/*.framework; do\n  if [ ! -d \"$framework\" ] || [ ! -f \"$framework/Info.plist\" ]; then\n    continue\n  fi\n\n  identifier=$(/usr/libexec/PlistBuddy -c \"Print :CFBundleIdentifier\" \"$framework/Info.plist\" 2>/dev/null || true)\n  case \"$identifier\" in\n    io.flutter.flutter.native-assets.*)\n      echo \"Code Signing $framework with Identity $SIGN_IDENTITY\"\n      /usr/bin/codesign --force --sign \"$SIGN_IDENTITY\" ${OTHER_CODE_SIGN_FLAGS:-} --preserve-metadata=identifier,entitlements \"$framework\"\n      ;;\n  esac\ndone\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

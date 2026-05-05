@@ -1,14 +1,8 @@
-import UIKit
 import Flutter
+import UIKit
 
 @main
-@objc class AppDelegate: FlutterAppDelegate {
-
-  lazy var engine: FlutterEngine = {
-    let result = FlutterEngine(name: "mm.pndaza.atthanissaya")
-    result.run()
-    return result
-  }()
+@objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
 
   private var methodChannel: FlutterMethodChannel?
   private var eventChannel: FlutterEventChannel?
@@ -18,11 +12,13 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
 
-    GeneratedPluginRegistrant.register(with: engine)
+  func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
+    GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
 
-    let messenger = engine.binaryMessenger
-
+    let messenger = engineBridge.applicationRegistrar.messenger()
     methodChannel = FlutterMethodChannel(name: "mm.pndaza.atthanissaya/channel", binaryMessenger: messenger)
     eventChannel = FlutterEventChannel(name: "mm.pndaza.atthanissaya/events", binaryMessenger: messenger)
 
@@ -34,16 +30,6 @@ import Flutter
     })
 
     eventChannel?.setStreamHandler(linkStreamHandler)
-
-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-  }
-
-  override func application(
-    _ application: UIApplication,
-    configurationForConnecting connectingSceneSession: UISceneSession,
-    options: UIScene.ConnectionOptions
-  ) -> UISceneConfiguration {
-    return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
   }
 
   override func application(
@@ -51,7 +37,9 @@ import Flutter
     open url: URL,
     options: [UIApplication.OpenURLOptionsKey: Any] = [:]
   ) -> Bool {
-    return linkStreamHandler.handleLink(url.absoluteString)
+    let flutterHandled = super.application(app, open: url, options: options)
+    let appHandled = linkStreamHandler.handleLink(url.absoluteString)
+    return flutterHandled || appHandled
   }
 
   func handleDeepLink(_ url: URL) -> Bool {
