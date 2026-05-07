@@ -22,37 +22,33 @@ class ReaderPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollDirection = ref.watch(scrollDirectionProvider);
     final colorMode = ref.watch(pdfColorModeProvider);
-
+    final container = ProviderScope.containerOf(context);
     return Scaffold(
       appBar: ReaderAppBar(bookID: id, bookName: name),
-      body: GestureDetector(
-        onTap: () {
-          ref.read(readerViewController).toggleFullScreenMode();
-        },
-        child: JustPdfViewer.asset(
-          'assets/books/pdf/$id.pdf',
-          config: PdfViewerConfig(
-            initialPage: pageNumber,
-            scrollDirection: scrollDirection,
-            colorMode: colorMode,
-            pageSnapping: scrollDirection == Axis.horizontal
-          ),
-          callbacks: PdfViewerCallbacks(
-            onPageChanged: (pageIndex) {
-              EasyDebounce.debounce(
-                'page_changed',
-                const Duration(milliseconds: 500),
-                () {
-                  ref
-                      .read(readerViewController)
-                      .onPageChanged(nsyBookId: id, pageIndex: pageIndex);
-                },
-              );
-            },
-            onTap: () {
-              ref.read(readerViewController).toggleFullScreenMode();
-            },
-          ),
+      body: JustPdfViewer.asset(
+        'assets/books/pdf/$id.pdf',
+        config: PdfViewerConfig(
+          initialPage: pageNumber,
+          scrollDirection: scrollDirection,
+          colorMode: colorMode,
+          pageSnapping: scrollDirection == Axis.horizontal,
+        ),
+        callbacks: PdfViewerCallbacks(
+          onPageChanged: (pageIndex) {
+            EasyDebounce.debounce(
+              'page_changed',
+              const Duration(milliseconds: 500),
+              () {
+                if (!context.mounted) return;
+                container
+                    .read(readerViewController)
+                    .onPageChanged(nsyBookId: id, pageIndex: pageIndex);
+              },
+            );
+          },
+          onTap: () {
+            ref.read(readerViewController).toggleFullScreenMode();
+          },
         ),
       ),
     );
