@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../../utils/navigation_helper.dart';
 import '../../utils/platform_helper.dart';
+import '../../utils/window_config.dart';
 
 import '../info/info_page.dart';
 import 'home_view_controller.dart';
@@ -25,7 +27,7 @@ class Home extends ConsumerStatefulWidget {
   HomeState createState() => HomeState();
 }
 
-class HomeState extends ConsumerState<Home> {
+class HomeState extends ConsumerState<Home> with WindowListener {
   final List<NavDestination> destinations = <NavDestination>[
     NavDestination(label: 'ပင်မ', iconData: Icons.home),
     NavDestination(label: 'ကြည့်ဆဲ', iconData: Icons.history),
@@ -37,12 +39,47 @@ class HomeState extends ConsumerState<Home> {
   void initState() {
     super.initState();
     pageController = PageController(initialPage: selectedIndex);
+    if (isDesktop) {
+      windowManager.addListener(this);
+      windowManager.setPreventClose(true);
+    }
   }
 
   @override
   void dispose() {
+    if (isDesktop) {
+      windowManager.removeListener(this);
+    }
     pageController.dispose();
     super.dispose();
+  }
+
+  @override
+  void onWindowClose() async {
+    final isMaximized = await windowManager.isMaximized();
+
+    if (!isMaximized) {
+      final position = await windowManager.getPosition();
+      final size = await windowManager.getSize();
+      await WindowConfig.saveWindowConfig({
+        'left': position.dx,
+        'top': position.dy,
+        'width': size.width,
+        'height': size.height,
+        'isMaximized': 0.0,
+      });
+    } else {
+      await WindowConfig.saveWindowConfig({
+        'isMaximized': 1.0,
+      });
+    }
+
+    await windowManager.destroy();
+  }
+
+  @override
+  void onWindowFocus() {
+    setState(() {});
   }
 
   @override

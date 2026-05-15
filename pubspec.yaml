@@ -25,9 +25,8 @@ dependencies:
   logger: ^2.0.2+1
   cupertino_icons: ^1.0.2
   flutter_widget_from_html_core: ^0.17.2
-  sqflite: ^2.1.0
-  sqflite_common_ffi: ^2.1.1+1
-  sqlite3_flutter_libs:
+  sqflite: ^2.4.2+1
+  sqflite_common_ffi:
   just_pdf_viewer:
     git:
       url: https://github.com/pndaza/just_pdf_viewer
@@ -37,6 +36,7 @@ dependencies:
   uni_links_desktop: ^0.2.0
   uni_links: ^0.5.1
   easy_debounce: ^2.0.3
+  window_manager: ^0.4.0
 
 
 dev_dependencies:
