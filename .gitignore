@@ -118,3 +118,7 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 
 .fvm/flutter_sdk
+
+# Generated files
+*.freezed.dart
+*.g.dart
