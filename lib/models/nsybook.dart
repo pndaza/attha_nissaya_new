@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'nsybook.freezed.dart';
 
 @freezed
-class NsyBook with _$NsyBook {
+abstract class NsyBook with _$NsyBook {
   factory NsyBook(
       {required String id,
       required String name,

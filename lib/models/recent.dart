@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'recent.freezed.dart';
 
 @freezed
-class Recent with _$Recent {
+abstract class Recent with _$Recent {
   const factory Recent({
     required String nsyId,
     required String nsyName,
